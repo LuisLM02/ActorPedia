@@ -11,7 +11,9 @@
       [itemTemplate]="itemTemplate"
       [notFoundTemplate]="notFoundTemplate"
       (ngModelChange)="getSearchResult()"
+      (selected)="getSearchResultItem($event)"
     >
+    
     </ng-autocomplete>
     <ng-template #itemTemplate let-item>
       <a [innerHTML]="item.name" (click)="getSearchResultClick(item.name)"></a>
@@ -21,7 +23,7 @@
     </ng-template>
   </div>
 
-  <div class="search-results" *ngIf="visibility">
+  <div class="search-results" *ngIf="movies.length">
     <div *ngFor="let movie of movies" class="card">
       <img src="{{ movie.posters }}" alt="{{ movie.title }}" />
       <div>

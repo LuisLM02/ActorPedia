@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { moviesInterface } from './Actor';
+import { Actor, moviesInterface } from './Actor';
 import { ActorService } from './service/actor.service';
 
 @Component({
@@ -9,30 +9,22 @@ import { ActorService } from './service/actor.service';
 })
 
 export class AppComponent {
-  public keyword = 'name';
-  visibility = false;
-  search:any = '';
-  data = this.miActorsService.actors;
+  keyword:string = 'name';
+  search:string = '';
+  data:Array<Actor> = this.miActorsService.getActors();
   movies:Array<moviesInterface> = [];
 
   constructor(private miActorsService: ActorService){}
 
   getSearchResult(){
-    for (const actor of this.miActorsService.actors ) {
-      if(actor.name === this.search){
-        this.movies = actor.movies;
-        this.visibility = true;
-      }
-    }
+    this.movies = this.miActorsService.searchActors(this.search);
   }
 
-  getSearchResultClick(name:string){
-    this.search = name;
-    for (const actor of this.miActorsService.actors ) {
-      if(actor.name === this.search){
-        this.movies = actor.movies;
-        this.visibility = true;
-      }
-    }
+  getSearchResultClick(search:string){
+    this.movies = this.miActorsService.searchActors(search);
+  }
+
+  getSearchResultItem(item:Actor){
+    this.movies = this.miActorsService.searchActors(item.name);
   }
 }
