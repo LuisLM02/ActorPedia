@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actor, moviesInterface } from '../Actor';
+import { Actor } from '../Actor';
 
 @Injectable({
   providedIn: 'root'
@@ -157,19 +157,6 @@ export class ActorService {
       }
     ]),
   ]
-
-  searchActors(search:string):Array<moviesInterface>{
-    let movies:Array<moviesInterface> = [];
-    search = search.replace( /(<([^>]+)>)/ig, '');
-
-    for (const actor of this.actors ) {
-      if(actor.name.toLocaleLowerCase() === search.toLocaleLowerCase()){
-        movies = actor.movies;
-      }
-    }
-
-    return movies;
-  }
 
   getActors():Array<Actor>{
     return this.actors;

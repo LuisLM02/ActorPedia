@@ -1,0 +1,19 @@
+<ng-autocomplete
+  placeholder="Search..."
+  [(ngModel)]="search"
+  [data]="data"
+  [searchKeyword]="keyword"
+  [itemTemplate]="itemTemplate"
+  [notFoundTemplate]="notFoundTemplate"
+  (ngModelChange)="getSearchResult()"
+  (selected)="getSearchResultItem($event)"
+>
+</ng-autocomplete>
+
+<ng-template #itemTemplate let-item>
+  <a [innerHTML]="item.name" (click)="getSearchResultClick(item.name)"></a>
+</ng-template>
+
+<ng-template #notFoundTemplate let-notFound>
+  <div [innerHTML]="notFound"></div>
+</ng-template>

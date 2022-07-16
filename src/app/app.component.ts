@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Actor, moviesInterface } from './Actor';
-import { ActorService } from './service/actor.service';
+import { moviesInterface } from './Actor';
+import { SearchService } from './service/search.service';
 
 @Component({
   selector: 'app-root',
@@ -9,22 +9,11 @@ import { ActorService } from './service/actor.service';
 })
 
 export class AppComponent {
-  keyword:string = 'name';
-  search:string = '';
-  data:Array<Actor> = this.miActorsService.getActors();
   movies:Array<moviesInterface> = [];
 
-  constructor(private miActorsService: ActorService){}
+  constructor(private miSearchService: SearchService){}
 
-  getSearchResult(){
-    this.movies = this.miActorsService.searchActors(this.search);
-  }
-
-  getSearchResultClick(search:string){
-    this.movies = this.miActorsService.searchActors(search);
-  }
-
-  getSearchResultItem(item:Actor){
-    this.movies = this.miActorsService.searchActors(item.name);
+  updateMovies() : void{
+    this.movies = this.miSearchService.getMovies();
   }
 }

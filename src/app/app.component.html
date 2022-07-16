@@ -3,36 +3,11 @@
 
   <div class="container">
     <p>Search actor...</p>
-    <ng-autocomplete
-      placeholder="Search..."
-      [(ngModel)]="search"
-      [data]="data"
-      [searchKeyword]="keyword"
-      [itemTemplate]="itemTemplate"
-      [notFoundTemplate]="notFoundTemplate"
-      (ngModelChange)="getSearchResult()"
-      (selected)="getSearchResultItem($event)"
-    >
-    
-    </ng-autocomplete>
-    <ng-template #itemTemplate let-item>
-      <a [innerHTML]="item.name" (click)="getSearchResultClick(item.name)"></a>
-    </ng-template>
-    <ng-template #notFoundTemplate let-notFound>
-      <div [innerHTML]="notFound"></div>
-    </ng-template>
+    <app-search-bar (emitterMovie)="updateMovies()"></app-search-bar>
   </div>
 
   <div class="search-results" *ngIf="movies.length">
-    <div *ngFor="let movie of movies" class="card">
-      <img src="{{ movie.posters }}" alt="{{ movie.title }}" />
-      <div>
-        <h3>Title: {{ movie.title }}.</h3>
-        <p>Director: {{ movie.director }}.</p>
-        <p>Genre: {{ movie.genres }}.</p>
-        <p>Year: {{ movie.year }}.</p>
-      </div>
-    </div>
+    <app-movie></app-movie>
   </div>
 
   <div class="circle1"></div>
